@@ -10,6 +10,18 @@ import streamlit as st
 
 
 st.set_page_config(layout="wide")
+#filelocation
+DATA_URL= "tweets.xlsx"
+
+#readdata
+@st.cache(persist =True)
+def load_data():
+	data = pd.read_excel(DATA_URL)
+	data['tweet_created']= pd.to_datetime(data['tweet_created'])
+
+	return data
+
+data = load_data()
 sample_size = 10
 urls = [
     'https://devdashboard.tradingblock.com',
